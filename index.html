@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Química interactiva · Manrique Pharma</title>
+  <meta name="description" content="Manual de química con tabla periódica interactiva, química inorgánica y química orgánica con mecanismos de reacción. Uso educativo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <div>
+        <p class="header-sub">QUÍMICA GENERAL · USO EDUCATIVO · FARMACÉUTICA</p>
+        <h1 class="header-title">Química <span class="accent">interactiva</span></h1>
+      </div>
+      <div class="brand-block">
+        <p class="brand-name">MANRIQUE<br />PHARMA</p>
+      </div>
+    </div>
+
+    <nav class="branch-tabs" role="tablist" aria-label="Ramas de la química">
+      <button id="btab-tabla" class="active" role="tab" aria-selected="true">
+        <span class="btab-num">A</span> Tabla periódica
+      </button>
+      <button id="btab-inorg" role="tab" aria-selected="false">
+        <span class="btab-num">B</span> Química inorgánica
+      </button>
+      <button id="btab-org" role="tab" aria-selected="false">
+        <span class="btab-num">C</span> Química orgánica
+      </button>
+    </nav>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
+        </svg>
+        <input id="search" type="search" placeholder="Buscar elemento o tema…" aria-label="Buscar" autocomplete="off" />
+      </div>
+      <div class="view-toggle" id="tabla-toggle" role="tablist" aria-label="Modo de vista">
+        <button id="tab-tabla" class="active" role="tab" aria-selected="true">Tabla</button>
+        <button id="tab-repaso" role="tab" aria-selected="false">Repaso</button>
+      </div>
+    </div>
+
+    <div id="tabla-filters">
+      <div class="legend" id="legend" aria-label="Filtrar por categoría"></div>
+      <div class="state-filters" id="state-filters" aria-label="Filtrar por estado físico"></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="vista-tabla" aria-label="Tabla periódica">
+      <div class="table-scroll" id="table-scroll">
+        <div class="ptable" id="ptable"></div>
+        <div class="fblock-gap" aria-hidden="true"></div>
+        <div class="fblock" id="fblock"></div>
+      </div>
+      <p class="table-hint">Toca un elemento para ver su ficha · pasa el cursor para resaltar su grupo y período</p>
+    </section>
+
+    <section id="vista-repaso" class="hidden" aria-label="Modo repaso">
+      <div class="quiz" id="quiz"></div>
+    </section>
+
+    <section id="vista-inorg" class="hidden" aria-label="Química inorgánica">
+      <div class="chem" id="chem-inorg"></div>
+    </section>
+
+    <section id="vista-org" class="hidden" aria-label="Química orgánica">
+      <div class="chem" id="chem-org"></div>
+    </section>
+  </main>
+
+  <div class="drawer-backdrop hidden" id="drawer-backdrop"></div>
+  <aside class="drawer hidden" id="drawer" role="dialog" aria-modal="true" aria-label="Ficha del elemento">
+    <div id="drawer-content"></div>
+  </aside>
+
+  <footer class="site-footer">
+    <p>
+      Tabla basada en la numeración IUPAC 1–18. Masas atómicas estándar (CIAAW),
+      electronegatividades de Pauling y configuraciones electrónicas de los
+      elementos en su estado fundamental. Datos de uso educativo: no sustituyen
+      literatura química especializada.
+    </p>
+    <p class="footer-brand">MANRIQUE PHARMA · MATERIAL DE ESTUDIO</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="compat.js"></script>
+  <script src="quimica.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
