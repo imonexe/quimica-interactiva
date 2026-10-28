@@ -837,3 +837,18 @@ main { flex: 1; padding: 22px clamp(16px, 3vw, 44px) 30px; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* Estados de oxidación */
+.ox-box { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.ox-chip {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--cat, var(--accent)) 12%, transparent);
+  border-color: color-mix(in srgb, var(--cat, var(--accent)) 40%, transparent);
+}
+.ox-chip.neg { color: var(--warn); }
+.ox-none { font-size: 12px; color: var(--muted, #8a8f8c); font-style: italic; }

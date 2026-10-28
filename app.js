@@ -273,6 +273,16 @@ function fmtMass(m) {
   return Number.isInteger(m) ? String(m) : m.toFixed(m < 10 ? 3 : 2).replace(/0+$/, '').replace(/\.$/, '');
 }
 
+function fmtProp(n) {
+  if (n === null || n === undefined) return '—';
+  return String(Math.round(n * 100) / 100);
+}
+
+function oxChips(ox) {
+  if (!ox || !ox.length) return '<span class="ox-none">Sin estados conocidos (inerte o sintético)</span>';
+  return ox.map((o) => `<span class="ox-chip ${o < 0 ? 'neg' : ''}">${o > 0 ? '+' + o : o < 0 ? '−' + Math.abs(o) : '0'}</span>`).join('');
+}
+
 function openDrawer(z) {
   const e = byZ.get(z);
   if (!e) return;
@@ -281,6 +291,7 @@ function openDrawer(z) {
   const en = e.en !== null ? e.en.toFixed(2).replace(/\.?0+$/, '') : '—';
   const enPct = e.en !== null ? Math.round((e.en / 3.98) * 100) : 0;
   const compat = compatOf(e);
+  const p = (typeof PROPS !== 'undefined' && PROPS[z]) || {};
 
   drawerContent.innerHTML = `
     <div class="drawer-inner" style="--cat:${cat.color}">
@@ -312,6 +323,19 @@ function openDrawer(z) {
 
       <p class="ficha-label">Configuración electrónica</p>
       <p class="config">${configOf(e.z).replace(/\[(\w+)\]/, '<span class="core">[$1]</span>')}</p>
+
+      <p class="ficha-label">Estados de oxidación</p>
+      <div class="ox-box">${oxChips(p.ox)}</div>
+
+      <p class="ficha-label">Ficha técnica</p>
+      <dl class="data-grid">
+        <div class="data-cell"><dt>Densidad</dt><dd>${p.den != null ? `${fmtProp(p.den)} ${p.du}` : '—'}</dd></div>
+        <div class="data-cell"><dt>P. de fusión</dt><dd>${p.melt != null ? `${fmtProp(p.melt)} °C` : '—'}</dd></div>
+        <div class="data-cell"><dt>P. de ebullición</dt><dd>${p.boil != null ? `${fmtProp(p.boil)} °C` : '—'}</dd></div>
+        <div class="data-cell"><dt>1ª energía de ionización</dt><dd>${p.ie != null ? `${fmtProp(p.ie)} kJ/mol` : '—'}</dd></div>
+        <div class="data-cell"><dt>Afinidad electrónica</dt><dd>${p.ea != null ? `${fmtProp(p.ea)} kJ/mol` : '—'}</dd></div>
+        <div class="data-cell"><dt>Descubrimiento</dt><dd>${p.disc ?? '—'}</dd></div>
+      </dl>
 
       <p class="ficha-label">Con qué se combina</p>
       <div class="qsec" style="margin-top:0">
